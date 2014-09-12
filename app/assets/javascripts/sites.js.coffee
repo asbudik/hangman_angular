@@ -25,7 +25,7 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
   $scope.chars = [].concat.apply([], Array(26)).map((_, i) ->
     String.fromCharCode i + 65
   )
-  # $scope.arrayWords = []
+  $scope.arrayWords = []
   $scope.words = {}
 
   $scope.getWord = (game) ->
@@ -35,9 +35,13 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     
     i = 0
     count = 0
+    # console.log($scope.words[splitWord[i] + count] = "")
+
     while i < game.secret.length
       $scope.words[splitWord[i] + count] = ""
-      console.log($scope.words)
+      $scope.arrayWords.push($scope.words)
+      # console.log($scope.arrayWords)
+      $scope.words = {}
       i++
       count++
 
@@ -47,12 +51,10 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     i = 0
     # console.log("array", $scope.arrayWords['A'])
     # console.log("dsfsd", Object.keys($scope.words).length)
-    while i < Object.keys($scope.words).length
-      console.log("pandababies", $scope.words["#{letter}#{i}"])
-      if $scope.words["#{letter}#{i}"] == ""
-        $scope.words["#{letter}#{i}"] = letter
-        console.log($scope.words)
-
+    while i < $scope.arrayWords.length
+      console.log("array", $scope.arrayWords[i][letter + i])
+      if $scope.arrayWords[i][letter + i] == ""
+        $scope.arrayWords[i][letter + i] = letter
       i++
 
 ]
