@@ -1,0 +1,19 @@
+<h1>Hangman</h1>
+
+<form action="javascript:void(0);" ng-submit="getWord(game)">
+  <input type="text" ng-model="game.secret" placeholder="Enter a secret word" autofocus required>
+  <button>Send</button>
+</form>
+<div class="alphabet">
+  <ul ng-repeat="letter in chars">
+    <a href ng-click="findLetter(letter)"><li>{{letter}}</li></a>
+  </ul>
+</div>
+
+<div class="lines">
+  <span ng-repeat="word in words track by $index">
+  <div class="letters">
+   <span class="letter"> {{word}}</span>
+   </div>
+  </span>
+</div>
