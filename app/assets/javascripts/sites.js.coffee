@@ -25,36 +25,104 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
   $scope.chars = [].concat.apply([], Array(26)).map((_, i) ->
     String.fromCharCode i + 65
   )
+
   $scope.arrayWords = []
   $scope.words = {}
+  $scope.secret = ""
+  $scope.count = 0
+  $scope.guesses = 6
+  $scope.singleCheck = {}
+  $scope.revertLetterHide = []
+  $scope.objWinKeys = []
+
+  j = 0
+  while j < 6
+    $scope.singleCheck["checked#{j}"] = false
+    console.log($scope.singleCheck)
+    j++
 
   $scope.getWord = (game) ->
+    $scope.secret = game
+    $scope.formsubmit = true
+    $scope.play = true
+    # console.log("word", $scope.secret)
     
     splitWord = game.secret.toUpperCase().split('')
-
     
     i = 0
     count = 0
-    # console.log($scope.words[splitWord[i] + count] = "")
 
     while i < game.secret.length
       $scope.words[splitWord[i] + count] = ""
+      $scope.objWinKeys.push(splitWord[i] + count)
       $scope.arrayWords.push($scope.words)
-      # console.log($scope.arrayWords)
       $scope.words = {}
       i++
       count++
 
     this.game = {}
+    $scope.dismiss = "modal"
+
 
   $scope.findLetter = (letter) ->
-    i = 0
-    # console.log("array", $scope.arrayWords['A'])
-    # console.log("dsfsd", Object.keys($scope.words).length)
-    while i < $scope.arrayWords.length
-      console.log("array", $scope.arrayWords[i][letter + i])
-      if $scope.arrayWords[i][letter + i] == ""
-        $scope.arrayWords[i][letter + i] = letter
-      i++
+    $scope.wrongGuess = true
+    if $scope.secret == "" || $scope.guesses == 0
+      letter.preventDefault()
+    else
+      $scope.revertLetterHide.push(this)
+      i = 0
+      while i < $scope.arrayWords.length
+        this.hideLetter = true
+        if $scope.arrayWords[i][letter + i] == ""
+          $scope.arrayWords[i][letter + i] = letter
+          $scope.wrongGuess = false
+        i++
+
+      if $scope.wrongGuess == true
+        $scope.singleCheck["checked" + $scope.count] = true
+        # console.log($scope.singleCheck)
+        $scope.count += 1
+        $scope.guesses -= 1
+        if $scope.guesses == 0
+          # console.log($scope.secret)
+          $scope.gameover = true
+          $scope.notice = "Sorry, the answer was '#{$scope.secret.secret.toUpperCase()}'"
+          $scope.replay = true
+
+      win = true
+      count = 0
+      for i in $scope.arrayWords
+        console.log(i[$scope.objWinKeys[count]])
+        if i[$scope.objWinKeys[count]] == ""
+          win = false
+        count++
+
+      if win == true
+        $scope.guesses = 0
+        $scope.notice = "You have won! Congratulations!"
+        $scope.gameover = true
+        $scope.replay = true
+
+  $scope.refresh = () ->
+    $scope.arrayWords = []
+    $scope.words = {}
+    $scope.secret = ""
+    $scope.singleCheck = {}
+    $scope.guesses = 6
+    $scope.count = 0
+    $scope.replay = false
+    $scope.notice = ""
+    $scope.play = false
+    $scope.gameover = false
+    $scope.formsubmit = false
+    $scope.hideLetter = false
+
+    for i in $scope.revertLetterHide
+      i.hideLetter = false
+
+    $scope.revertLetterHide = []
+
+
+
 
 ]
