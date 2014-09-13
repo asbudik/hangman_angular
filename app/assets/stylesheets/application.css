@@ -21,6 +21,8 @@
 .alphabet {
   text-align: center;
   float: right;
+  position: relative;
+  top: -80px;
 }
 .line {
   margin: 10px;
@@ -29,6 +31,11 @@
 .title {
   background-color: #3f3f3f;
   height: 60px;
+}
+.hints {
+  float: right;
+  position: relative;
+  top: -100px;
 }
 .hangmantitle {
   color: white;
@@ -39,11 +46,11 @@
 .guesses {
   float: right;
   position: relative;
-  top: -50px;
-  left: 40px;
+  left: -20px;
+  top: -160px;
   color: white;
-
 }
+
 .playbutton {
   float: right;
   position: relative;
@@ -60,9 +67,15 @@
   position: relative;
   top: 50px;
 }
+.gameover-container {
+  height: 110px;
+  position: relative;
+  left: 155px;
+}
 .gameover {
   text-align: center;
   left: 50px;
+  float: left;
 }
 .exitmodal {
   margin-top: 50px;
@@ -70,10 +83,17 @@
 .getplaying {
   text-align: center;
 }
+.allhangman {
+  position: relative;
+}
 .lines {
   margin: 30px;
-  width: 300px;
+  margin-top: 0px;
+  width: 500px;
   white-space: nowrap;
+}
+.footer {
+  height: 70px;
 }
 .letters {
   float: left;

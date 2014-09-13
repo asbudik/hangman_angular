@@ -34,6 +34,9 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
   $scope.singleCheck = {}
   $scope.revertLetterHide = []
   $scope.objWinKeys = []
+  $scope.hints = {}
+  $scope.newHint = []
+  $scope.hintcount = 0
 
   j = 0
   while j < 6
@@ -41,10 +44,14 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     console.log($scope.singleCheck)
     j++
 
-  $scope.getWord = (game) ->
+  $scope.getWord = (game, hint) ->
+    $scope.hints = hint
+    console.log($scope.hints)
     $scope.secret = game
     $scope.formsubmit = true
     $scope.play = true
+    if $scope.hints != undefined
+      $scope.hintbutton = true
     # console.log("word", $scope.secret)
     
     splitWord = game.secret.toUpperCase().split('')
@@ -62,6 +69,14 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
 
     this.game = {}
     $scope.dismiss = "modal"
+
+  $scope.showHint = () ->
+    $scope.newHint.push($scope.hints[$scope.hintcount])
+    $scope.hintcount += 1
+    if $scope.newHint.length == Object.keys($scope.hints).length
+      $scope.hintbutton = false
+
+
 
 
   $scope.findLetter = (letter) ->
@@ -86,6 +101,7 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
         if $scope.guesses == 0
           # console.log($scope.secret)
           $scope.gameover = true
+          $scope.hintbutton = false
           $scope.notice = "Sorry, the answer was '#{$scope.secret.secret.toUpperCase()}'"
           $scope.replay = true
 
@@ -99,8 +115,9 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
 
       if win == true
         $scope.guesses = 0
-        $scope.notice = "You have won! Congratulations!"
         $scope.gameover = true
+        $scope.hintbutton = false
+        $scope.notice = "You have won! Congratulations!"
         $scope.replay = true
 
   $scope.refresh = () ->
@@ -116,6 +133,10 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     $scope.gameover = false
     $scope.formsubmit = false
     $scope.hideLetter = false
+    $scope.newHint = []
+    $scope.hintcount = 0
+    $scope.hintbutton = false
+
 
     for i in $scope.revertLetterHide
       i.hideLetter = false

@@ -17,6 +17,3 @@
 //= require angular-rails-templates
 //= require_tree .
 //= require_tree ../templates
-$('#playModal').on('shown.bs.modal', function () {
-    $('.secretword').focus();
-})

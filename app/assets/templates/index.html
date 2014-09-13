@@ -1,7 +1,23 @@
 <div class="title container-fluid">
   <h1 class="hangmantitle">Hangman</h1>
 </div>
-<div class="container">
+<div class="gameover-container">
+ <button class="btn-default btn hintbutton" ng-show="hintbutton" ng-click="showHint()">Hint</button>
+<div class="gameover" ng-show="gameover">
+  <h2><strong>Game Complete!</strong></h2><br>
+  <span><strong>{{notice}}</strong></span>
+</div>
+</div>
+<h4 class="guesses">Remaining chances: <strong>{{guesses}}</strong></h4>
+<div class="gameover-container hints">
+<div ng-repeat="hint in newHint track by $index">
+  <span><strong>{{hint}}</strong></span>
+</div>
+
+</div>
+
+
+<div class="allhangman container">
 <div class="row">
   <div class="hangmancanvas col-sm-6">
     <svg height="500" width="500">
@@ -35,7 +51,6 @@
   </div>
 
   <div class="col-sm-6">
-  <h4 class="guesses">Remaining chances: <strong>{{guesses}}</strong></h4>
   <div class="alphabet">
     <div class="all" ng-repeat="letter in chars">
       <a href ng-hide="hideLetter" ng-click="findLetter(letter)"><button class="alpha btn btn-danger">{{letter}}</button></a>
@@ -52,9 +67,16 @@
       </div>
 
       <div class="modal-body">
-        <form action="javascript:void(0);" ng-hide="formsubmit" ng-submit="getWord(game)">
+        <form action="javascript:void(0);" ng-hide="formsubmit" ng-submit="getWord(game, hint)">
         <div class="form-group">
           <input type="text" class="secretword form-control" ng-model="game.secret" placeholder="Enter a secret word" onkeydown="Check(event);" onkeyup="Check(event);" autofocus required>
+        </div>
+
+          <input type="text" class="secretword form-control" ng-model="hint.0" placeholder="Hint1">
+
+          <input type="text" class="secretword form-control" ng-model="hint.1" placeholder="Hint2">
+        <div class="form-group">
+          <input type="text" class="secretword form-control" ng-model="hint.2" placeholder="Hint3">
         </div>
         <div class="form-group">
           <button class="form-control btn-danger">Enter Word</button>
@@ -62,16 +84,9 @@
         </form>
         <h1 class="getplaying" ng-show="formsubmit">Get playing!</h1>
         <button ng-show="formsubmit" class="form-control exitmodal btn-danger" data-dismiss="modal">Play Now</button>
-      </div>
     </div>
   </div>
 </div>
-
-<div class="gameover" ng-show="gameover">
-  <h2><strong>Game Complete!</strong></h2><br>
-  <span><strong>{{notice}}</strong></span>
-</div>
-
 </div>
 
 
