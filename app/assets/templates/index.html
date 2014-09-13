@@ -54,7 +54,7 @@
       <div class="modal-body">
         <form action="javascript:void(0);" ng-hide="formsubmit" ng-submit="getWord(game)">
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="game.secret" placeholder="Enter a secret word" onkeydown="Check(event);" onkeyup="Check(event);"autofocus required>
+          <input type="text" class="secretword form-control" ng-model="game.secret" placeholder="Enter a secret word" onkeydown="Check(event);" onkeyup="Check(event);" autofocus required>
         </div>
         <div class="form-group">
           <button class="form-control btn-danger">Enter Word</button>
