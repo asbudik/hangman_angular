@@ -11,7 +11,7 @@
 <h4 class="guesses">Remaining chances: <strong>{{guesses}}</strong></h4>
 <div class="gameover-container hints">
 <div ng-repeat="hint in newHint track by $index">
-  <span><strong>{{hint}}</strong></span>
+  <span class="ahint"><strong>{{hint}}</strong></span>
 </div>
 
 </div>
@@ -20,20 +20,20 @@
 <div class="allhangman container">
 <div class="row">
   <div class="hangmancanvas col-sm-6">
-    <svg height="500" width="500">
-    <polyline points="210,0 0,0 0,500" style="fill:white;stroke:black;stroke-width:45" />
+    <svg height="380" width="500">
+    <polyline points="210,0 0,0 0,380" style="fill:white;stroke:black;stroke-width:45" />
 
     <circle cx="200" cy="70" r="40" stroke="black" stroke-width="3" fill="none" ng-show="singleCheck.checked0"/>
 
-    <line x1="200" y1="110" x2="200" y2="300" stroke="black" stroke-width="5" ng-show="singleCheck.checked1"/>
+    <line x1="200" y1="110" x2="200" y2="250" stroke="black" stroke-width="5" ng-show="singleCheck.checked1"/>
 
-    <line x1="200" y1="150" x2="100" y2="200" stroke="black" stroke-width="5" ng-show="singleCheck.checked2"/>
+    <line x1="200" y1="120" x2="100" y2="150" stroke="black" stroke-width="5" ng-show="singleCheck.checked2"/>
 
-    <line x1="200" y1="150" x2="300" y2="200" stroke="black" stroke-width="5" ng-show="singleCheck.checked3"/>
+    <line x1="200" y1="120" x2="300" y2="150" stroke="black" stroke-width="5" ng-show="singleCheck.checked3"/>
 
-    <line x1="200" y1="298" x2="150" y2="450" stroke="black" stroke-width="5" ng-show="singleCheck.checked4"/>
+    <line x1="200" y1="248" x2="120" y2="320" stroke="black" stroke-width="5" ng-show="singleCheck.checked4"/>
 
-    <line x1="200" y1="298" x2="250" y2="450" stroke="black" stroke-width="5" ng-show="singleCheck.checked5"/>
+    <line x1="200" y1="248" x2="280" y2="320" stroke="black" stroke-width="5" ng-show="singleCheck.checked5"/>
     </svg>
 
     <button ng-hide="play" class=" playbutton btn btn-default btn-md" data-toggle="modal" data-target="#playModal">Play</button>
@@ -72,11 +72,11 @@
           <input type="text" class="secretword form-control" ng-model="game.secret" placeholder="Enter a secret word" onkeydown="Check(event);" onkeyup="Check(event);" autofocus required>
         </div>
 
-          <input type="text" class="secretword form-control" ng-model="hint.0" placeholder="Hint1">
+          <input type="text" class="secretword form-control" ng-model="hint.0" placeholder="(optional) first hint">
 
-          <input type="text" class="secretword form-control" ng-model="hint.1" placeholder="Hint2">
+          <input type="text" class="secretword form-control" ng-model="hint.1" placeholder="(optional) second hint">
         <div class="form-group">
-          <input type="text" class="secretword form-control" ng-model="hint.2" placeholder="Hint3">
+          <input type="text" class="secretword form-control" ng-model="hint.2" placeholder="(optional) third hint">
         </div>
         <div class="form-group">
           <button class="form-control btn-danger">Enter Word</button>

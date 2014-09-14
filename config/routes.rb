@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'todos/index'
+
+  get 'todos/create'
+
+  get 'todos/update'
+
+  get 'todos/destroy'
+
   resources :sites, except: [:new, :edit]
 
   match "*path", to: "sites#index", via: "get"

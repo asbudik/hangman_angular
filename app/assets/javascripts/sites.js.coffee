@@ -55,6 +55,7 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     # console.log("word", $scope.secret)
     
     splitWord = game.secret.toUpperCase().split('')
+    $scope.hint = {}
     
     i = 0
     count = 0
@@ -136,6 +137,7 @@ GameApp.controller "GamesCtrl", ["$scope", "$http", ($scope, $http) ->
     $scope.newHint = []
     $scope.hintcount = 0
     $scope.hintbutton = false
+    $scope.objWinKeys = []
 
 
     for i in $scope.revertLetterHide
